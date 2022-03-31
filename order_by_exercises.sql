@@ -21,5 +21,5 @@ ORDER BY last_name , first_name ;
 SELECT  last_name,first_name
 FROM employees
 WHERE last_name like '%E$'
-ORDER BY  emp_no desc ;
+ORDER BY  emp_no desc;
 -- Now reverse the sort order for both queries and compare results.
