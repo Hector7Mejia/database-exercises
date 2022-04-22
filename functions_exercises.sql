@@ -1,28 +1,40 @@
-SELECT first_name, last_name
-FROM employees
-WHERE first_name IN ('Irena','Vidya', 'Maya')
-ORDER BY first_name , last_name;
--- Change the ORDER BY clause so that you order by last name before first name. Your first result should still be Irena Acton but now the last result should be Maya Zyda.
-SELECT  last_name,first_name
-FROM employees
-WHERE first_name IN ('Irena','Vidya', 'Maya')
-ORDER BY last_name , first_name ;
--- Update your queries for employees with 'e' in their last name to sort the results by their employee number. Make sure the employee numbers are in the correct order.
-SELECT CONCAT(first_name, ' ', last_name) as full_name
-FROM employees
-WHERE last_name like '%E%'
-order by emp_no desc;
+USE hector
 
-select count(*)
-from employees
-where month(birth_date) = 12
-and day(birth_date) = 25
-and year(hire_date) between 1990 and 1999
-order by hire_date desc;
+#TODO: Update your queries for employees whose names start and end with 'E'.
+# Use concat() to combine their first and last name together as a single column in your results.
+SELECT CONCAT(first_name, ' ', last_name)
+FROM employees
+WHERE last_name LIKE 'E%'
+ORDER BY last_name;
 
-select first_name, last_name, hire_date
-       ,dateddiff(now(), hire_date) as days_work ing
-from employees
-where month(birth_date) = 12
-and day(birth_date) = 25
-and year(hire_date) between 1990 and 1999;
+#TODO: Find all employees born on Christmas — 842 rows.
+SELECT *
+FROM employees
+WHERE month(birth_date) = 12
+  AND day(birth_date) = 25;
+
+#TODO: Find all employees hired in the 90s and born on Christmas — 362 rows.
+SELECT *
+FROM employees
+WHERE year(hire_date) BETWEEN 1990 AND 1999
+  AND month(birth_date) = 12
+  AND day(birth_date) = 25;
+
+#TODO: Change the query for employees hired in the 90s and born on Christmas such that the first result is the oldest employee who was hired last.
+# It should be Khun Bernini.
+SELECT *
+FROM employees
+WHERE year(hire_date) BETWEEN 1990 AND 1999
+  AND month(birth_date) = 12
+  AND day(birth_date) = 25
+ORDER BY birth_date, year(hire_date) DESC
+LIMIT 1;
+
+#TODO: For your query of employees born on Christmas and hired in the 90s, use datediff() to find how many days they have been working at the company
+SELECT  CONCAT(first_name, ' ', last_name) AS 'Full Name',
+        DATEDIFF(curdate(), hire_date) AS 'Days With Company'
+FROM employees
+WHERE year(hire_date) BETWEEN 1990 AND 1999
+  AND month(birth_date) = 12
+  AND day(birth_date) = 25
+ORDER BY DATEDIFF(curdate(), hire_date);

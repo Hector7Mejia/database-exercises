@@ -1,25 +1,37 @@
--- Create a new file called order_by_exercises.sql and copy and paste the contents of your where_exercises.sql.
+# TODO: Modify your first query to order by first name.
+#  The first result should be Irena Pelz and the last result should be Vidya Awdeh.
+SELECT *
+FROM employees
+WHERE first_name IN ('Irena', 'Vidya', 'Maya')
+ORDER BY first_name;
 
--- Modify your first query to order by first name. The first result should be Irena Pelz and the last result should be Vidya Awdeh.
-SELECT first_name,last_name
+# TODO: Update the query to order by first name and then last name. The first result should now be Irena Acton and the last should be Vidya Zweizig.
+SELECT *
 FROM employees
-WHERE first_name IN ('Irena','Vidya', 'Maya')
-ORDER BY first_name Desc, last_name DESC;
+WHERE first_name IN ('Irena', 'Vidya', 'Maya')
+ORDER BY first_name, last_name;
 
+# TODO: Change the ORDER BY clause so that you order by last name before first name.
+#   Your first result should still be Irena Acton but now the last result should be Maya Zyda.
+SELECT *
+FROM employees
+WHERE first_name IN ('Irena', 'Vidya', 'Maya')
+ORDER BY last_name, first_name;
 
--- Update the query to order by first name and then last name. The first result should now be Irena Acton and the last should be Vidya Zweizig.
-SELECT first_name, last_name
+# TODO: Update your queries for employees with 'e' in their last name to sort the results by their employee number.
+#   Make sure the employee numbers are in the correct order.
+SELECT *
 FROM employees
-WHERE first_name IN ('Irena','Vidya', 'Maya')
-ORDER BY first_name , last_name;
--- Change the ORDER BY clause so that you order by last name before first name. Your first result should still be Irena Acton but now the last result should be Maya Zyda.
-SELECT  last_name,first_name
+WHERE last_name LIKE 'E%'
+ORDER BY emp_no;
+
+# TODO: Now reverse the sort order for both queries and compare results.
+SELECT *
 FROM employees
-WHERE first_name IN ('Irena','Vidya', 'Maya')
-ORDER BY last_name , first_name ;
--- Update your queries for employees with 'e' in their last name to sort the results by their employee number. Make sure the employee numbers are in the correct order.
-SELECT  last_name,first_name
+WHERE last_name LIKE 'E%'
+ORDER BY emp_no DESC;
+
+SELECT *
 FROM employees
-WHERE last_name like '%E$'
-ORDER BY  emp_no desc;
--- Now reverse the sort order for both queries and compare results.
+WHERE first_name IN ('Irena', 'Vidya', 'Maya')
+ORDER BY last_name DESC , first_name DESC ;
